@@ -1,0 +1,32 @@
+  <section class="basic-wide-our-team board-directors">
+    <div class="container">
+      <h3>Board of Directors</h3>
+      {% for signup in page.directory.listings %}
+        {% if signup.tags contains "board"  %}
+          <a href="#" class="modalBio-link" data-toggle="modal" data-target="#modalBio-{{signup.id}}">
+            <div class="col-lg-f col-md-f col-xs-6 team-member wow fadeIn">
+              <img src="{{signup.profile_image_url}}" width="150" height="150" class="team-member-pic"><br>
+              <h4>{{signup.full_name_or_friend}}</h4>
+              <p>{{signup.occupation}}</p>
+            </div>
+          </a>
+          <div class="modal fade" id="modalBio-{{signup.id}}" tabindex="-1" role="dialog" aria-labelledby="modalBio-{{signup.id}}" aria-hidden="true">
+            <div class="modal-dialog  modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">{{ signup.full_name_or_friend }}</h4>
+                </div>            
+                <div class="modal-body">
+
+                  <div class="content">
+                    <p>{{ signup.description }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>        
+        {% endif %}
+      {% endfor %}  
+    </div>
+  </section>

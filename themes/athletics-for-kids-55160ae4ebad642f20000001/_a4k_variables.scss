@@ -1,0 +1,46 @@
+/* BRAND COLORS */
+
+$a4k-orange:   #fb8728;
+$a4k-teal:     #16c6b7;
+$a4k-yellow:   #ffc72f;
+
+$trans-yellow: rgba(255,188,0,1);
+$trans-orange: rgba(251,135,40,1);
+$trans-teal:   rgba(22,198,183,1);
+
+$a4k-teal-dark: #1C9E94;
+
+/* ACCENT COLORS */
+
+$accent-lightOrange: #ffd9b9;
+$accent-darkOrange:  #a95c1d;
+
+/* GREYS */
+
+$bodyBlue:		   #26293C;
+$bodyGrey:	       #696A6F;
+$footer-grey:      #3a3f3e;
+$footer-lightGrey: #1F2233;
+$lightGrey:        #43465D;
+$borderGrey:       #E6E6E6;
+$headerGrey: 	   #4f4f4e;
+$tealGrey:		   #32413F;
+
+
+$bg-blue-dark:	   #26293C;
+$bg-beige:         #fffdf6;
+$bg-beige-dark:    #fff7e2;
+$bg-yellow:        #ffc72f;
+
+
+/* MIXINS */
+
+@mixin transition($time) {
+  -webkit-transition: -webkit-transform $time,background 0.1s,height $time, width $time;
+  -o-transition-property: height,-o-transform,background, width;
+  -o-transition-duration: $time,$time,0.1s,$time;
+  -moz-transition-property: height,-o-transform,background, width;
+  -moz-transition-duration: $time,$time,0.1s,$time;
+  transition-property: height,transform,background, width;
+  transition-duration: $time,$time,0.1s,$time;
+} 

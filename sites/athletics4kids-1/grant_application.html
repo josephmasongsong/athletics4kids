@@ -1,0 +1,26 @@
+<section class="basic-wide-hero" style="{% for feature in page.features limit: 1 %}background:url('{{ feature.image_url }}') no-repeat center center; background-size: cover;{% endfor %}">
+  <div class="container">
+    {% if page.headline.size > 0 %}
+    <h2 class="headline">{{ page.headline }}</h2>
+    {% endif %}
+  </div>
+</section>
+<section class="article-wrapper">
+  <div class="container">
+    <div class="row">
+        <div class="form-wrap">
+            <div class="form">
+
+              <!-- www.123contactform.com script begins here -->
+
+              <script type="text/javascript">var servicedomain="www.123contactform.com"; var frmRef=''; try { frmRef=window.top.location.href; } catch(err) {}; var cfJsHost = (("https:" == document.location.protocol) ? "https://" : "http://"); document.write(unescape("%3Cscript src='" + cfJsHost + servicedomain + "/includes/easyXDM.min.js' type='text/javascript'%3E%3C/script%3E")); frmRef=encodeURIComponent(frmRef).replace('%26','[%ANDCHAR%]'); document.write(unescape("%3Cscript src='" + cfJsHost + servicedomain + "/jsform-1386483.js?ref="+frmRef+"' type='text/javascript'%3E%3C/script%3E")); </script>
+              
+              <!-- www.123contactform.com script ends here -->
+
+
+
+            </div><!-- /form -->
+          </div><!-- /form-wrap -->        
+      </div>
+    </div>
+</section>

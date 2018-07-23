@@ -1,0 +1,62 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Begin Page Title -->
+  <title>{{ page_title }}</title>
+  <!-- End Page Title -->
+
+  <!-- Begin Stylesheets -->
+  <link rel="stylesheet" href="theme.scss" />
+  <link rel="stylesheet" href="tablet-and-desktop.scss" />
+  {% comment %}Remove this stylesheet before using this theme{% endcomment %}<link href="//cdn.symbolset.com/5691ecb2e617628aefd8f9eb233dd6a126d55857/symbolset.css" rel="stylesheet">
+  <!-- End Stylesheets -->
+
+  <script src="modernizr.js"></script>
+
+  <!-- Begin NationBuilder’s “Content For Header” Include -->
+  {{ content_for_header }}
+
+  <script type="text/javascript">
+    NB.appConfig.userIsLoggedIn = {{request.logged_in?}};
+  </script>
+  <!-- End NationBuilder’s “Content For Header” Include -->
+</head>
+<body id="{{ page.slug }}" class="antialiased">
+
+  <!-- Begin Nav Bar -->
+  {% include "nav" %}
+  <!-- End Nav Bar -->
+
+  <!-- Begin Main Page Content and Sidebar -->
+  <div id="{% if request.is_sidebar? %}columns-1{% else %}columns-1{% endif %}">
+      {% if request.is_sidebar? %}
+      {% include "columns_1" %}
+      {% else %}
+      {% include "columns_1" %}
+      {% endif %}
+  </div>
+  <!-- End Main Content and Sidebar -->
+
+  {% include "footer" %}
+
+  <!-- Begin Javascript -->
+  <script src="foundation.js"></script>
+  <script src="foundation.alert.js"></script>
+  <script src="foundation.interchange.js"></script>
+  <script src="foundation.orbit.js"></script>
+  <script src="foundation.reveal.js"></script>
+  <script src="foundation.topbar.js"></script>
+  <script>$(document).foundation();</script>
+  {% comment %}Remove this javascript before using this theme{% endcomment %}<script src="//cdn.symbolset.com/5691ecb2e617628aefd8f9eb233dd6a126d55857/symbolset.js"></script>
+  <script type="text/javascript" src="jquery.ui.effect.min.js"></script>
+  <script type="text/javascript" src="jquery.ui.effect-slide.min.js"></script>
+  <!-- End Javascript -->
+
+  <!-- Begin NationBuilder’s “Content For Footer” Include -->
+  {{ content_for_footer }}
+  <!-- End NationBuilder’s “Content For Footer” Include -->
+</body>
+</html>

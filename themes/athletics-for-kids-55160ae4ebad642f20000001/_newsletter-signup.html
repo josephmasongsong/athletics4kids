@@ -1,0 +1,24 @@
+<section class="email-signup form">
+	<div class="container">
+	  <div class="row">
+	    <div class="col-md-6">
+	      <h2>Sign up for our newsletter</h2>
+	    </div>
+	    <div class="col-md-6">
+	      <div class="row">
+	       {% form_for signup %}   
+		        <div class="col-md-8">
+		          {% hidden_field_tag "page_id", page.id %} 
+		          <div class="form-errors">{% error_messages_for signup %}</div>
+		          <input required="" class="text user-error" id="signup_email" name="signup[email]" placeholder="Your email..." type="email" aria-invalid="true" onkeyup="checkInput(this.value)">
+		        </div>
+		        <div class="col-md-4">
+		          <button type="submit" class="hollow-button" name="commit" value="Join">Sign up</button>
+		          <div class="form-submit"></div>
+		        </div>
+	      	{% endform_for %}
+		    </div>
+		  </div>
+		</div>
+	</div>
+</section>

@@ -1,0 +1,49 @@
+  <!-- Begin Footer -->
+  <footer>
+    <div class="row">
+      <div class="large-12 columns">
+        <hr />
+        <div class="row">
+          <div class="large-6 columns">{{ site.footer_content }}</div>
+          <div class="large-6 columns">
+            <p class="right">
+              {% if request.logged_in? %}
+                Hi
+              <a href="{{ request.current_signup.settings_url }}">{{ request.current_signup.name_or_email }}</a>
+              . View your
+                {% if site.show_public_profiles? %}
+              <a href="{{ request.current_signup.profile_url }}">public profile</a>
+              ,
+                {% endif %}
+              <a href="{{ request.current_signup.settings_url }}">account settings</a>
+              , or
+              <a href="{{ request.current_signup.logout_url }}">sign out</a>
+              .
+              {% else %}
+                Sign in with
+              <a href="{{ request.facebook_connect_url }}">Facebook</a>
+              ,
+              <a href="{{ request.twitter_connect_url }}">Twitter</a>
+              or
+              <a href="/login">email</a>
+              .
+              {% endif %}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="large-12 columns">
+        <!-- The NationBuilder link below is required. If it is removed, we may add it back ourselves.
+                     You can style it or move it in different ways, but please leave it in the footer. -->
+        <p class="text-center">
+          <small>
+            Created with
+            <a href="http://nationbuilder.com">NationBuilder</a>
+          </small>
+        </p>
+      </div>
+    </div>
+  </footer>
+  <!-- End Footer -->

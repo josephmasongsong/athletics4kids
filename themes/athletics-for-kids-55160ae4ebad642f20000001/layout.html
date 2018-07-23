@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ page_title }}</title>
+
+    <!-- Bootstrap -->
+    <link href="theme.scss" rel="stylesheet">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Quicksand:300,400,700' rel='stylesheet' type='text/css'>
+    <link href="a4k.scss" rel="stylesheet">
+    <link href="animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="owl.carousel.css">
+
+
+    {{ content_for_header }}
+
+    <script type="text/javascript">
+      NB.appConfig.userIsLoggedIn = {{request.logged_in?}};
+    </script>
+  </head>
+  <body class="page-{{ request.template | replace: '_', '-' }}">
+
+    {% include "nav" %}
+
+{% comment %}    {% if site.has_header_image? and page.features_count == 0 %}
+    <div class="container header-image-container">
+     <img src="{{ site.header_image_url_1026 }}" class="header-image img-responsive" border="0" />
+    </div>
+    {% endif %}
+
+    {% if page.features_count > 0 %}
+      <div class="container">
+       {% include "features" %}
+      </div>
+    {% endif %}{% endcomment %}
+
+    <div class="page-wrapper">
+
+        {% if request.is_sidebar? %}
+        {% include "columns_2" %}
+        {% else %}
+        {% include "columns_1" %}
+        {% endif %}
+
+    </div>
+    <!-- .main-container -->
+
+    {% include "footer" %}
+    {{ content_for_footer }}
+
+    {% if site.has_background_image? %}
+      <!--[if lt IE 9]>
+      <script type="text/javascript" src="/javascripts/jquery.backstretch.min.js"></script>
+      <script type="text/javascript">
+        jQuery.backstretch("{{ site.background_image_url }}", {speed: 0});
+      </script>
+      <![endif]-->
+
+    {% endif %}
+
+    <script src="bootstrap.js"></script>
+    <script src="wow.min.js"></script>
+    <script src="a4k.js"></script>
+    <script>
+      new WOW().init();
+    </script>
+    <script src="owl.carousel.js"></script>
+    <script>
+      $(document).ready(function(){
+        $(".owl-carousel").owlCarousel({
+          autoPlay: true,
+          singleItem:true
+        });
+      });    
+    </script>
+  </body>
+</html>
+

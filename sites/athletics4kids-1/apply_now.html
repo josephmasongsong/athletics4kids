@@ -1,0 +1,504 @@
+<section class="basic-wide-hero {% if page.is_homepage? == true %} homepage-hero {% endif %}" style="{% for feature in page.features limit: 1 %}background:url('{{ feature.image_url }}') no-repeat center center; background-size: cover;{% endfor %}">
+  <div class="container">
+    {% unless page.is_homepage? == true %}
+      <h2 class="headline">{{ page.headline }}</h2>
+    {% else %}
+      {% for child in page.children %}
+        {% if child.slug == 'main_heading' %}
+          <h1 class="headline">{{ child.headline }}<br>
+          <h3 class="subline">{{child.basic.content}}</h3>
+          </h2>
+        {% endif %} 
+      {% endfor %}     
+    {% endunless %}
+  </div>
+  {% if page.is_homepage? == true %}
+    {% include "athletes" %}
+    <div class="divider-rainbow"></div>
+  {% endif %}
+</section>
+
+{% unless page.slug == 'the_impact' or page.slug == 'apply_now' %}
+  <section class="basic-wide-content">
+    <div class="container">
+      <div class="col-lg-10 col-md-12 col-lg-offset-1 basic-content">
+        {{ page.basic.content }}
+      </div>
+      {% if page.is_homepage? == true and site.page_tags contains "homepage" %}
+        {% tag "homepage" with "homepage_widget" %}
+      {% endif %}
+    </div>
+</section>
+{% endunless %}
+
+
+{% if page.is_homepage? == true %}
+
+  {% for child in page.children %}
+    {% if child.slug == 'blurb_1' %}
+      <section class="panel-col-2 blurb-1">
+        <div class="left-side">
+          {% for feature in child.features limit: 1 %} 
+            <img class="panel-img" src="{{ feature.image_url }}" />
+          {% endfor %}
+        </div>
+
+        <div class="right-side align">
+          <div class="panel-wrapper">
+            <div class="panel">
+              <div class="content">
+                <h3>{{ child.basic.content }}</h3>
+              </div>
+            </div>
+          </div>
+       </div>
+      </section>
+    {% endif %}
+
+    {% if child.slug == 'blurb_2' %}
+      <section class="panel-col-2 blurb-2">
+        <div class="left-side align">
+          <div class="panel-wrapper">
+            <div class="panel">
+              <div class="content">
+                <h3>{{ child.basic.content }}</h3>
+              </div>
+            </div>
+          </div>
+       </div>
+        <div class="right-side">
+          {% for feature in child.features limit: 1 %} 
+            <img class="panel-img" src="{{ feature.image_url }}" />
+          {% endfor %}
+        </div>
+      </section>
+    {% endif %}
+  {% endfor %}
+
+  <section class="basic-wide-video">
+    <div class="container">
+      <div class="row">
+        <a href="#" id="video-modal-link" data-toggle="modal" data-target="#videoModal" data-theVideo="{{ page.excerpt }}" >Watch our video <span class="play-btn">></span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="basic-wide-aotm">
+    <div class="container">
+      <div class="row">
+        {% for signup in site.random_supporters %}
+          {% if signup.tags contains "athlete of the month" %}
+            <div class="col-lg-5 col-md-5  aotm-image">
+              <img src="{{ signup.profile_image_url }}" width="400" height="400" />
+            </div>
+            <div class="col-lg-7 col-md-7 aotm-description">
+              <h3>Athlete of the month</h3>
+              <p>{{ signup.description }}</p>
+              <a href="#">See pasts athletes &rarr;</a>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="panel-col-2 content-panel">
+    <div class="left-side align">
+      <div class="panel-wrapper">
+        <div class="panel">
+          <div class="content-top left-align">
+            <h3>Latest News</h3>
+            {% for post in site.most_recent_blog_post_pages limit: 1 offset: 0 %}
+            <h4>{{post.headline}}</h4>
+            <p>{{ post.blog_post.content | truncatewords: 20 }}</p>
+            <a href="{{ post.url }}">Read more &rarr;</a>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="right-side align">
+      <div class="panel-wrapper">
+        <div class="panel">
+          <div class="content-top left-align">
+            <h3>Latest Events</h3>
+            {% for event in site.upcoming_event_pages limit: 1 offset: 0 %}
+              <h4><a href="{{ event.url }}">{{ event.name }}</a></h4>
+              <p span class="event-date">{{ event.event.local_start_at | date: '%A, %B %d, %Y at %I:%M %p' }}</p>
+              <!-- {{ event.event.venue_name }} -->
+              <p>{{ event.event.content | truncatewords: 30 }}</p>
+              <a href="{{ event.url }}">Read more &rarr;</a>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  {% for child in page.children %}
+  {% if child.slug == 'our_contributors_home_page'%}
+  <section class="homepage-our-contributors">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-12">
+        <h3>{{child.headline}}</h3>
+        </div>
+      </div>
+      <div class="row">
+        {% for feature in child.features limit: 6 %}
+          <div class="col-lg-2 col-md-2 col-xs-6 contributor-logo">
+            <img src="{{feature.image_url}}">
+          </div>
+        {% endfor %}
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12">      
+          <a href="#">See all of our contributors &rarr;</a>  
+        </div>
+      </div>
+    </div>
+  </section>
+  {% endif %}
+  {% endfor %}
+
+  <section class="basic-wide-testimonial">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-12">
+          <div class="owl-carousel">
+            {% for signup in site.random_supporters %}
+              {% if signup.tags contains "testimonial" %}
+                <div class="signup-testimonial col-md-10 col-lg-10 col-lg-offset-1 col-md-offset-1">
+                  <h4>{{ signup.description }}</h4>
+                  <p>{{signup.full_name_or_friend}}, {{signup.occupation}}</p>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>    
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  {% else %}
+
+
+  <section class="basic-wide-child-content-2-columns">
+    <div class="container-fluid">
+      {% for child in page.children %}
+      {% if child.slug == 'our_mission' %}
+        <div class="panel-col-2 mission">
+          <div class="left-side">
+            {% for feature in child.features limit: 1 %} 
+              <img class="panel-img" src="{{ feature.image_url }}" />
+            {% endfor %}
+          </div>
+
+          <div class="right-side align">
+            <div class="panel-wrapper">
+              <div class="panel">
+                <div class="content left-align">
+                  <h3>{{ child.headline }}</h3>
+                  <p>{{ child.basic.content }}</p>
+                </div>
+              </div>
+            </div>
+         </div>
+        </section>
+      {% endif %}
+    {% endfor %}
+
+    {% for child in page.children %}
+      {% if child.slug == 'our_goal' %}
+        <div class="panel-col-2 goal">
+          <div class="left-side align">
+            <div class="panel-wrapper">
+              <div class="panel">
+                <div class="content left-align">
+                  <h3>{{ child.headline }}</h3>
+                  <p>{{ child.basic.content }}</p>
+                </div>
+              </div>
+            </div>
+         </div>
+          <div class="right-side">
+            {% for feature in child.features limit: 1 %} 
+              <img class="panel-img" src="{{ feature.image_url }}" />
+            {% endfor %}
+          </div>
+        </section>
+      {% endif %}
+    {% endfor %}
+    </div>
+  </section>  
+
+{% endif %}
+
+{% if page.slug == 'how_you_can_help'%}
+
+  {% for child in page.children %}
+    {% if child.slug == 'our_store' %}
+      <section class="panel-col-2 store">
+        <div class="left-side">
+          {% for feature in child.features limit: 1 %} 
+            <img class="panel-img" src="{{ feature.image_url }}" />
+          {% endfor %}
+        </div>
+
+        <div class="right-side align">
+          <div class="panel-wrapper">
+            <div class="panel">
+              <div class="content left-align how-you-can-help-content">
+                <h3>{{ child.basic.content }}</h3>
+              </div>
+            </div>
+          </div>
+       </div>
+      </section>
+    {% endif %}
+
+    {% if child.slug == 'raffles' %}
+      <section class="panel-col-2 raffles">
+        <div class="left-side align">
+          <div class="panel-wrapper">
+            <div class="panel">
+              <div class="content left-align how-you-can-help-content">
+                <h3>{{ child.basic.content }}</h3>
+              </div>
+            </div>
+          </div>
+       </div>
+        <div class="right-side">
+          {% for feature in child.features limit: 1 %} 
+            <img class="panel-img" src="{{ feature.image_url }}" />
+          {% endfor %}
+        </div>
+      </section>
+    {% endif %}
+    
+  {% endfor %}
+
+  <section class="donate-now">
+    <div class="container">
+      <div class="row">
+      {% for child in page.children %}
+        {% if child.slug == 'donate_now' %}
+          <div class="child-content col-lg-8 col-md-8">
+            <h3>{{ child.headline }}</h3>
+            <p> {{ child.basic.content }}</p>
+          </div>
+        {% endif %}
+      {% endfor %}
+      </div>
+    </div>
+  </section>
+
+{% endif %}
+
+{% if page.slug == 'the_impact' %}
+
+<section class="why-sports">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-lg-12">
+        <h3>Why are sports important?</h3>
+      </div>
+    </div>
+    
+    <div class="row">
+      {% for child in page.children limit: 6 %}
+      <div class="col-md-4 col-lg-4 sports-reason">
+        <h4>{{child.headline}}</h4>
+        <p>{{child.basic.content}}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endif %}
+
+{% unless page.slug == 'how_you_can_help' or page.slug == 'apply_now' or page.is_homepage? == true %}
+
+<section class="basic-wide-video">
+  <div class="container">
+    <div class="row">
+      <a href="#" id="video-modal-link" data-toggle="modal" data-target="#videoModal" data-theVideo="{{ page.excerpt }}" >Watch our video <span class="play-btn">></span></a>
+    </div>
+  </div>
+</section>
+
+{% endunless %}
+
+
+{% if page.slug == 'about_us' %}
+
+<section class="how-we-help">
+  <div class="container">
+    <div class="row">
+    {% for child in page.children %}
+      {% if child.slug == 'how_we_help' %}
+      <div class="child-content col-lg-8 col-md-8">
+        <h3>{{ child.headline }}</h3>
+        <p> {{ child.basic.content }}</p>
+      </div>
+      {% endif %}
+    {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endif %}
+
+{% if page.slug == 'about_us' %}
+
+<section class="our-history">
+{% for child in page.children %}
+  {% if child.slug == 'our_history' %}
+      <div class="panel-col-2">
+        <div class="left-side align">
+          <div class="panel-wrapper">
+            <div class="panel">
+              <div class="content long-text left-align">
+                <h3>{{ child.headline }}</h3>
+                <p>{{ child.basic.content }}</p>
+              </div>
+            </div>
+          </div>
+       </div>
+        <div class="right-side">
+          {% for feature in child.features limit: 1 %} 
+            <img class="panel-img" src="{{ feature.image_url }}" />
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  {% endfor %}
+</section>
+
+{% endif %}
+
+
+{% if page.slug == 'about_us' %}
+
+<section class="basic-wide-our-team board-directors">
+  <div class="container">
+    <h3>Board of Directors</h3>
+    {% for signup in site.recent_supporters %}
+      {% if signup.tags contains "board" %}
+        <div class="col-lg-f col-md-f col-xs-6 team-member wow fadeIn">
+          <img src="{{signup.profile_image_url}}" width="150" height="150" class="team-member-pic"><br>
+          <h4>{{signup.full_name_or_friend}}</h4>
+          <p>{{signup.occupation}}</p>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+<section class="basic-wide-our-team supporting-staff">
+  <div class="container">
+    <h3>Our Supporting Staff</h3>
+    {% for signup in site.recent_supporters %}
+      {% if signup.tags contains "staff" %}
+        <div class="col-lg-f col-md-f col-xs-=
+        ] team-member wow fadeIn">
+          <img src="{{signup.profile_image_url}}" width="150" height="150" class="team-member-pic"><br>
+          <h4>{{signup.full_name_or_friend}}</h4>
+          <p>{{signup.occupation}}</p>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+{% elsif page.slug == 'the_impact'%}
+
+<section class="basic-wide-testimonial">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="owl-carousel">
+          {% for signup in site.recent_supporters %}
+            {% if signup.tags contains "testimonial" %}
+              <div class="signup-testimonial col-md-10 col-lg-10 col-lg-offset-1 col-md-offset-1">
+                <h4>{{ signup.description }}</h4>
+                <p>{{signup.full_name_or_friend}},{{signup.occupation}}</p>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>   
+      </div>
+    </div>   
+  </div>
+</section>
+
+<section class="basic-wide-our-team">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <h3>Past athletes of the month</h3>
+        {% for signup in site.recent_supporters %}
+          {% if signup.tags contains "athlete" %}
+            <div class="col-lg-f col-md-f col-xs-6 team-member">
+              <img src="{{signup.profile_image_url}}" width="150" height="150" class="team-member-pic"><br>
+              <h4>{{signup.full_name_or_friend}}</h4>
+              <p>{{signup.occupation}}</p>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endif %}
+
+{% unless page.slug == 'apply_now' %}
+
+<section class="donate-now-cta">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <button class="donate-now">Donate</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% else %}
+
+<section class="apply-now">
+  <div class="container">
+    <div class="row">
+      <div class="sidebar col-lg-3 col-lg-push-9">
+        {% for child in page.children %}
+          <h3>{{child.headline}}</h3>
+          {{ child.basic.content }}
+        {% endfor %}
+      </div>
+      <div class="content col-lg-9 col-lg-pull-3">
+        {{ page.basic.content }}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endunless %}
+
+
+<div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <div>
+          <iframe width="100%" height="350" src="" frameborder="0"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

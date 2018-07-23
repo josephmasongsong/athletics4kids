@@ -1,0 +1,26 @@
+    {% if page.headline.size > 0 %}
+    <h3 class="show-for-medium-up">{{ page.headline }}</h3>
+    <h3 class="show-for-small-only text-center headline">{{ page.headline }}</h3>
+      {% endif %}
+    <div id="leaderboard-content">
+      {% for leaderboard in page.page_leaderboards %}
+      <p class="show-for-medium-up">Top {{ leaderboard.display_number_results }} {{ leaderboard.display_name }}</p>
+      <p class="show-for-small-only text-center">Top {{ leaderboard.display_number_results }} {{ leaderboard.display_name }}</p>
+      <table>
+        {% comment %}<thead>
+          <tr>
+            <th width="200">Table Header</th>
+            <th>Table Header</th>
+            <th width="150">Table Header</th>
+            <th width="150">Table Header</th>
+          </tr>
+        </thead>{% endcomment %}
+        <tbody>
+        {% for entry in leaderboard.entries %}
+  {% assign signup = entry.signup %}
+        {% include "leaderboard_signup_show" %}
+        {% endfor %}
+        </tbody>
+      </table>
+      {% endfor %}
+    </div>

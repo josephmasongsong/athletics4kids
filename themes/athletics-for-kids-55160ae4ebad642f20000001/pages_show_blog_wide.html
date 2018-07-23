@@ -1,0 +1,55 @@
+<section class="basic-wide-hero" style="{% for feature in page.features limit: 1 %}background:url('{{ feature.image_url }}') no-repeat center center; background-size: cover;{% endfor %}">
+  <div class="container">
+    <h2 class="headline">{{ page.headline }}</h2>
+  </div>
+</section>
+
+<section class="blog">
+  <div class="blog-container container">
+    <div class="row">
+      <div class="sidebar col-lg-4 col-lg-push-8">
+
+        <div class="upcoming">
+          <h3>Upcoming Events</h3>
+          {% for event in site.upcoming_event_pages limit: 1 offset: 0 %}
+            <h4><a href="{{ event.url }}">{{ event.name }}</a></h4>
+            <div class="event-meta">
+              <p>{{ event.event.venue_name }}</p>
+              <p>{{ event.event.local_start_at | date: '%A, %B %d, %Y at %I:%M %p' }}</p>
+            </div>
+            <p>{{ event.event.content }}</p>
+          {% endfor %}
+        </div>
+
+        <div class="twitter-feed">
+          <a class="twitter-timeline" href="https://twitter.com/Athletics4kids" data-widget-id="668211771841220608">Tweets by @Athletics4kids</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        </div>
+      </div>
+
+      <div class="content col-lg-8 col-lg-pull-4" id="blog-page-{{ page.id }}">
+        {% for post in page.blog.most_recent_blog_posts %}
+        <div class="page-excerpt padbottom" id="blog-post-page-{{ post.id }}">
+          <h2><a href="{{ post.url }}">{{ post.headline }}</a></h2>
+          <p class="byline">Posted by {{ post.author.published_name_linked }} &middot; {{ post.published_at | date: '%B %d, %Y %l:%M %p' }}</p>
+          <div class="excerpt">
+            <p>{{ post.blog_post.content }}</p>
+            {% if post.blog_post.is_extended? %}
+            <p class='read-more'><a href='{{ post.url }}'>Read more &rarr;</a></p>
+            {% endif %}
+          </div>
+        </div>
+        {% endfor %}
+
+        {{ page.blog.most_recent_blog_posts | paginate prev_label: "&laquo;" next_label: "&raquo;" | replace:'<div class="pagination">','<nav class="pagination-container">' | replace:'<ul>','<ul class="pagination">' | replace:'</div>','</nav>' }}
+
+      </div>  
+
+    </div>
+  </div>
+</section>
+
+{% if request.logged_in? %}
+{% else %}
+  {% subpage "newsletter_signup_home" with "newsletter-signup" %}
+{% endif %}

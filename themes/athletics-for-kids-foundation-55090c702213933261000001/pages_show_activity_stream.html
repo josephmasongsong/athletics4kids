@@ -1,0 +1,73 @@
+
+
+{% if page.headline.size > 0 %}
+<h2 class="headline padbottom">{{ page.headline }}</h2>
+{% endif %}
+
+<div id="content">
+
+  {% if site.has_friends_page? %}
+
+  {% if request.logged_in? == false or request.current_signup.has_facebook_authorization? == false %}
+
+  <div class="row padbottommore">
+    <div class="columns">
+      <strong>Connect to Facebook to find your friends.</strong>
+
+      <div class="padtopless">
+        <a href="{{ request.facebook_connect_url }}"><img src="{{ "signin_with_facebook.png" | asset_path }}"></a>
+      </div>
+    </div>
+  </div>
+
+  {% endif %}
+
+  {% if request.logged_in? == false or request.current_signup.has_twitter_authorization? == false %}
+
+  <div class="row">
+    <div class="columns">
+      <strong>Connect to Twitter to find your friends here.</strong>
+
+      <div class="padtopless">
+        <a href="{{ request.twitter_connect_url }}"><img src="{{ "signin_with_twitter.png" | asset_path }}"></a></div>
+    </div>
+  </div>
+
+  {% endif %}
+
+  {% endif %}
+
+  {% if request.logged_in? %}
+
+  <div id="stream">
+    <div class="reaction-wrap" id="reactions">
+
+      <ul id="stream-activities" class="activities">
+        {% for activity in page.activity_stream.activities_following %}
+        <li class="activity clearfix">
+          <div class="stream-pic">
+            {% if site.show_public_profiles? == false %}
+              {% if activity.signup.has_twitter_info? %}<a href="{{ activity.signup.twitter_profile_url }}">{% elsif activity.signup.has_facebook_info? %}<a href="{{ activity.signup.facebook_profile_url }}">{% else %}{% endif %}
+              {% if activity.signup.has_facebook_info? %}
+              <img src="http://graph.facebook.com/{{ activity.signup.facebook_uid }}/picture?width=72&height=72" alt="Profile Photo">
+              {% else %}
+              <img src="{{ activity.signup.profile_image_url }}" alt="Profile Photo">
+              {% endif %}
+              {% if activity.signup.has_twitter_info? %}</a>{% elsif activity.signup.has_facebook_info? %}</a>{% else %}{% endif %}
+              {% else %}
+              {{ activity.signup.profile_image }}
+              {% endif %}
+          </div>
+          {{ activity.show }}
+        </li>
+        {% endfor %}
+      </ul>
+
+    </div>
+  </div>
+
+  {{ page.activity_stream.activities_following | paginate prev_label: "&laquo;" next_label: "&raquo;" }}
+
+  {% endif %}
+
+</div>

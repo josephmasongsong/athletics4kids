@@ -1,0 +1,14 @@
+<div class="owl-carousel">
+  {% for post in tag.most_recent_published_pages %}
+  <section class="basic-wide-content featured-post" style="{% for feature in post.features limit: 1 %}background:url('{{ feature.image_url }}') no-repeat center center; background-size: cover;{% endfor %}">
+  	<div class="container">
+  		<div class="row">
+  			<div class="col-md-10 col-md-offset-1">
+  				<a href="{{ post.url }}"><h2>{{ post.headline }}</h2></a>
+  				<div class="hollow-btn"><a href="{{ post.url }}" class="link-arrow">Learn more</a></div>
+  			</div>
+  		</div>
+  	</div>
+  </section>
+  {% endfor %}
+</div>

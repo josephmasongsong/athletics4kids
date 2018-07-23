@@ -1,0 +1,305 @@
+/* MEDIA QUERIES */
+
+@media (min-width: 768px) {
+.col-sm-f {
+        width: 20%;
+        float: left;
+    }
+}
+@media (min-width: 992px) {
+    .col-md-f {
+        width: 20%;
+        float: left;
+    }
+}
+@media (min-width: 1200px) {
+    .col-lg-f {
+        width: 20%;
+        float: left;
+    }
+}
+
+@media (max-width: 1200px) {
+  .show-on-large {
+    display: none;
+  }
+  .show-on-small {
+    display: block;
+  }
+}
+
+@media (min-width: 1199px) {
+  .show-on-large {
+    display: block;
+  }
+  .show-on-small {
+    display: none;
+  }
+}
+
+/* COMMON */
+
+
+@media (max-width: 992px) {
+	section.basic-wide-content { 
+		padding: 5rem 0; 
+		.basic-content {
+			p { font-size: 24px; }
+		}
+	}
+	h1 { font-size: 30px; }
+	h2 { font-size: 24px; }
+	h3 { 
+		font-size: 24px; 
+		font-weight: 500;
+	}
+	p {
+	  font-size: 16px;
+	  line-height: 1.5em;
+	}
+}
+
+
+/* NAVBAR */
+
+@media (max-width: 992px) {
+	.navbar-inverse {
+	  background-color: rgba(255,255,255,0.95) !important;
+	  border-bottom: 1px solid #eee;
+	  &.navbar {
+	  	.navbar-collapse {
+	  		border-color: transparent;
+	  		ul.navbar-nav.pull-right {
+	  			width: 100%;
+	  			text-align: center;
+	  			li {
+	  				a {
+		  				font-size: 18px;
+		  				margin-left: 0;
+		  				margin-top: 20px;
+		  				&:hover { border-bottom: 0; }
+		  			}
+		  			&:last-child a { 
+		  				border: none;
+		  				color: white;
+		  				background-color: $a4k-orange;
+		  			}
+	  			}
+	  			li.active a {
+	  				border-bottom: 0;
+	  				color: $a4k-teal;
+	  				&:focus {
+	  					color: $a4k-teal;
+	  					background-color: none;
+	  				}
+	  			}
+	  		}
+	  	}
+	  }
+	}
+}
+
+@media (max-width: 1200px) {
+	.navbar {
+		 &.navbar-inverse { padding: 2rem 0; }
+		.navbar-collapse .navbar-nav.pull-right>li {
+			&:last-child a {
+				margin-top: 0;
+			}
+		}
+		&.navbar-onscroll.navbar {
+			padding: 1rem 0;
+			.navbar-brand svg { 
+				@include transition(0.5s); 
+				width: initial;
+				padding-left: 1.5rem;
+			}
+		} 
+	}
+}
+
+/* HERO */
+
+@media(min-width: 1200px) {
+	section.basic-wide-hero.homepage-hero {
+		min-height: 600px;
+	}
+}
+
+@media(max-width: 1200px) {
+	section.basic-wide-hero {
+		 min-height: initial;
+		 &.homepage-hero { padding: 15rem 0 20rem; }
+		 h1.headline { margin: 0; }
+		.athletes-wrapper {
+			padding-left: 15px;
+			svg {
+				width: 100%;
+	  			height: 100%;
+	  			margin-bottom: -5px;
+			}
+		}
+		.divider-rainbow { background-size: contain; }
+	}
+}
+
+@media(max-width: 992px) {
+	section.basic-wide-hero {
+	 	h1.headline { 
+	 	  font-size: 30px;
+	 		margin: 0; 
+	 	}
+	 	h3.subline {
+	 		font-size: 18px; 
+	 		margin-top: 1rem;
+	 	}
+	}
+}
+
+/* PANELS */
+
+@media (max-width: 992px) {
+	.panel-col-2 {
+		.align {
+			padding-top: 0;
+		}
+		.left-side {
+			width: initial;
+			float: none;
+		}
+		.right-side {
+			width: initial;
+			float: none;
+		}
+		.panel-wrapper {
+			position: initial;
+			.panel {
+				width: 95%;
+				.content,
+				.content-top {
+					padding: 10% 0;
+				}
+			}
+		}
+		&.blurb-2 {
+			.left-side { background-color: $bg-beige-dark; }
+		}
+	}
+}
+
+
+
+/* ATHLETE OF THE MONTH */
+
+
+@media (max-width: 992px) {
+	.basic-wide-aotm {
+	  background-image: none;
+	  .aotm-description { text-align: center; }
+	  .aotm-image {
+	    text-align: center;
+	    img {
+	      width: 200px;
+	      border-radius: 50%;
+	      height: auto;
+	    }
+	  }
+	}
+}
+
+/* TESTIMONIALS */
+
+@media (max-width: 992px) {
+	.signup-testimonial h4 {
+	  font-size: 18px;
+	  line-height: 1.5em;
+	}
+}
+
+/* CONTRIBUTORS */
+
+@media (max-width: 992px) {
+	.homepage-our-contributors {
+		padding: 5rem 0;
+		.contributor-logo {
+			img { width: 100%; }
+		}
+	}
+}
+
+/* FOOTER */
+
+@media (max-width: 992px) {
+	footer {
+		ul.list-inline>li {
+			display: list-item;
+		}
+		.text-right {
+			text-align: initial;
+		}
+		.footer-left {
+			text-align: initial;
+		}
+	}
+}
+
+/* THE IMPACT */ 
+
+@media (max-width: 992px) {
+	.why-sports {
+		padding: 5rem 0;
+		h3 { margin-bottom: 3rem; }
+		.sports-reason {
+			min-height: initial;
+			margin-bottom: 5rem;
+			text-align: center;
+			h4 { 
+				font-size: 18px;
+				width: initial; 
+			}
+		}
+	}
+}
+
+/* ABOUT US */
+
+@media (max-width: 992px) {
+	.content-pages-show-basic-wide {
+		.panel-col-2.goal {
+			.left-side { background-color: $bg-beige-dark; }
+		}
+		.how-we-help,
+		.basic-wide-our-team { padding: 5rem 0; }
+	}
+}
+
+/* HOW YOU CAN HELP */ 
+
+@media (max-width: 992px) {
+	.content-pages-show-basic-wide {
+		.panel-col-2.raffles {
+			.left-side { background-color: $bg-beige-dark; }
+		}
+		section.donate-now { padding: 5rem 0; }
+	}
+}
+
+
+/* TEAM & PAST ATHLETES */
+
+@media (max-width: 992px) {
+	.basic-wide-our-team {
+		padding: 5rem 0;
+		.team-member { min-height: 290px; }
+	}
+}
+
+/* BLOG */
+
+@media (max-width: 768px) {
+	.blog,
+	.apply-now { 
+		padding: 0 0 5rem 0; 
+		.content { padding-top: 3rem; }
+	}
+}

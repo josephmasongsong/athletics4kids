@@ -1,0 +1,17 @@
+// Applies label styles to NationBuilder’s “.page_tag_warning”, which is automatically applied to suggestion pages
+
+@import
+  "global",
+  "labels";
+
+.page_tag_warning, {
+  @include label-base;
+  @include label-size;
+  @include label-style($secondary-color);
+}
+
+.page_tag_notice {
+  @include label-base;
+  @include label-size;
+  @include label-style($success-color);
+}

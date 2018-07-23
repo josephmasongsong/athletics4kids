@@ -1,0 +1,32 @@
+
+
+{% if page.headline.size > 0 %}
+<h2 class="headline">{{ page.headline }}</h2>
+{% endif %}
+
+<div id="content">
+
+  You have <strong>{{ request.current_signup.followers_count }}</strong> followers.
+
+  <div class="padtop padbottommore">
+    <table>
+        {% comment %}<thead>
+          <tr>
+            <th width="200">Table Header</th>
+            <th>Table Header</th>
+            <th width="150">Table Header</th>
+            <th width="150">Table Header</th>
+          </tr>
+        </thead>{% endcomment %}
+        <tbody>
+        {% for follower in request.current_signup.followers %}
+    {% assign signup = follower.follower %}
+        {% include "signup_show" %}
+        {% endfor %}
+        </tbody>
+      </table>
+  </div>
+
+  {{ request.current_signup.followers | paginate prev_label: "&laquo;" next_label: "&raquo;" }}
+
+</div>

@@ -1,0 +1,50 @@
+<section class="basic-wide-blog" style="{% for feature in page.features limit: 1 %}background:url('{{ feature.image_url }}') no-repeat center center; background-size: cover;{% endfor %}">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <h2 class="headline">{{ page.headline }}</h2> 
+        {% if page.has_author? %}
+        <hr class="short-rule"></hr>      
+        <h3 class="byline">{% include "page_byline" %}</h3>  
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="article-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="article-content col-md-offset-2 col-md-8">
+        {% for ancestor in page.ancestors %}
+        <div class="article-back">
+          <a href="{{ ancestor.url }}">&larr; Back to all posts</a>
+        </div>
+        {% endfor %}
+        <div class="content">
+          {{ page.blog_post.content_full }}
+        </div>
+
+        {% if page.tags_count > 0 %}
+        <div class="article-tags">
+          {% include "page_tags" with page %}
+        </div>
+        {% endif %}
+
+        <div class="article-like">
+          <strong>Do you like this post?</strong>
+          {% include "like_page" %}
+        </div>
+
+        {% if page.show_stream? %}
+        {% include "page_stream" %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if request.logged_in? %}
+{% else %}
+  {% subpage "newsletter_signup_home" with "newsletter-signup" %}
+{% endif %}

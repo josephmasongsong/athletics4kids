@@ -1,0 +1,63 @@
+<footer>
+  <div class="col-lg-12 col-md-12 footer-logo">
+    <a class="navbar-brand" href="/">{% include "logo" %}</a>
+  </div>
+  <div class="col-lg-12 col-md-12 footer-nav">
+    <ul class="list-inline">
+      {% for child in site.root_nav_pages %}
+        {% if child.leaf? or child.nav_children.size == 0 %}
+        <li {% if child.is_or_is_ancestor_of_current_page? %}class="active"{% endif %}>
+          <a href="{{ child.url }}">{{ child.name }}</a>
+        </li>
+        {% else %}
+        <li class="{% if child.is_or_is_ancestor_of_current_page? %}active{% endif %} dropdown">
+          <a href="{{ child.url }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ child.name }} <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="{{ child.url }}">{{ child.name }}</a></li>
+            {% for child2 in child.nav_children %}
+            <li><a href="{{ child2.url }}">{{ child2.name }}</a></li>
+            {% endfor %}
+          </ul>
+        </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+    {% if site.footer_content.size > 0 %}
+      <div class="footer-text">{{ site.footer_content }}</div>
+    {% endif %}
+    <div class="footer-social">
+      <a href="https://twitter.com/athletics4kids" target="_blank"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x fa-inverse"></i></span></a>
+      <a href="https://www.facebook.com/Athletics4Kids/" target="_blank"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x fa-inverse"></i></span></a>
+      <a href="https://www.instagram.com/athletics4kids/" target="_blank"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-instagram fa-stack-1x fa-inverse"></i></span></a>
+      <a href="https://www.linkedin.com/company/athletics-for-kids
+" target="_blank"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-linkedin fa-stack-1x fa-inverse"></i></span></a>
+    </div>
+  </div>
+
+  <div class="col-lg-12 col-md-12 footer-bottom">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-xs-12 footer-left">
+          &copy; 2013 - 2017 Athletics For Kids
+          {% comment %}{% if request.logged_in? %}
+            Hi <a href="{{ request.current_signup.settings_url }}">{{ request.current_signup.name_or_email }}</a>. View your
+            {% if site.show_public_profiles? %}
+              <a href="{{ request.current_signup.profile_url }}">public profile</a>,
+            {% endif %}
+            <a href="{{ request.current_signup.settings_url }}">account settings</a>, or
+            <a href="{{ request.current_signup.logout_url }}">sign out</a>.
+          {% else %}
+            Sign in with <a href="{{ request.facebook_connect_url }}">Facebook</a>, <a
+                href="{{ request.twitter_connect_url }}">Twitter</a> or <a href="/login">email</a>.
+          {% endif %}{% endcomment %}
+        </div>
+        <div class="col-md-6 col-xs-12 footer-right text-right">
+          <!-- The NationBuilder link below is required. If it is removed, we may add it back ourselves.
+               You can style it or move it in different ways, but please leave it in the footer. -->
+          Built with <a href="http://nationbuilder.com/">NationBuilder</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+
+</footer>
